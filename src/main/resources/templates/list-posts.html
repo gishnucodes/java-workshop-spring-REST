@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Posts</title>
+</head>
+<body>
+<h1>Posts</h1>
+<a th:href="@{/web/posts/create}">Create New Post</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td th:text="${post.author}"></td>
+        <td th:text="${post.title}"></td>
+        <td th:text="${#temporals.format(post.date, 'dd-MM-yyyy HH:mm')}"></td>
+        <td>
+            <a th:href="@{/web/posts/{id}(id=${post.id})}">View</a>
+            <a th:href="@{/web/posts/edit/{id}(id=${post.id})}">Edit</a>
+            <a th:href="@{/web/posts/delete/{id}(id=${post.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
